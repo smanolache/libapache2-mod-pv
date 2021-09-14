@@ -130,7 +130,8 @@ handler(request_rec *r) noexcept {
 static int
 log(request_rec *r) noexcept {
 	if (nullptr == r || nullptr == r->handler ||
-	    0 != strcmp(r->handler, "pv_handler"))
+	    (0 != strcmp(r->handler, "pv_scan") &&
+	     0 != strcmp(r->handler, "pv_update")))
 		return DECLINED;
 	const void *cnf = ap_get_module_config(r->request_config, &pv_module);
 	if (!cnf)
